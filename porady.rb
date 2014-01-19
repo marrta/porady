@@ -9,23 +9,16 @@ end
 get '/szukaj' do
 	@keyword = params['keyword']
 
-	url_poradnia = "http://poradnia.pwn.pl/lista.php?szukaj=" + URI.encode(@keyword.encode("ISO-8859-2"))
-	doc_poradnia = Nokogiri.HTML(open(url_poradnia))
-	@result_poradnia = doc_poradnia.at_css('#listapytan').to_s.encode('UTF-8')
-
-	url_uz = "http://www.poradnia-jezykowa.uz.zgora.pl/wordpress/?s=" + URI.encode(@keyword.encode("UTF-8"))
-	doc_uz = Nokogiri.HTML(open(url_uz))
-	@result_uz = doc_uz.at_css('#content').to_s.encode("UTF-8")
-
-	url_wsjp = "http://www.wsjp.pl/index.php?szukaj=" + URI.encode(@keyword.encode("UTF-8"))
-	doc_wsjp = Nokogiri.HTML(open(url_wsjp))
-	@result_wsjp = doc_wsjp.at_css('.wyszukiwanie_wyniki .wyszukiwanie_wyniki').to_s.encode("UTF-8")
-
-	url_sjp = "http://sjp.pwn.pl/szukaj/" + URI.encode(@keyword.encode('UTF-8'))
-	doc_sjp = Nokogiri.HTML(open(url_sjp))
-	@result_sjp = doc_sjp.at_css('#tresc').to_s.encode('UTF-8')
-
+	@result_poradnia = result("http://poradnia.pwn.pl/lista.php?szukaj=", "ISO-8859-2", '#listapytan')
+	@result_uz = result("http://www.poradnia-jezykowa.uz.zgora.pl/wordpress/?s=", "UTF-8", "#content")
+	@result_wsjp = result("http://www.wsjp.pl/index.php?szukaj=", "UTF-8", ".wyszukiwanie_wyniki .wyszukiwanie_wyniki")
+	@result_sjp = result("http://sjp.pwn.pl/szukaj/", "UTF-8", "#tresc")
 
 	erb :szukaj
 end
  
+def result(url_base, encoding, selector)
+	url = url_base + URI.encode(@keyword.encode(encoding))
+	doc = Nokogiri.HTML(open(url))
+	result = doc.at_css(selector).to_s.encode("UTF-8")	
+end
