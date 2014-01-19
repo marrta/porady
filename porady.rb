@@ -17,6 +17,10 @@ get '/szukaj' do
 	doc_uz = Nokogiri.HTML(open(url_uz))
 	@result_uz = doc_uz.at_css('#content')
 
+	url_wsjp = "http://www.wsjp.pl/index.php?szukaj=" + URI.encode(@keyword)
+	doc_wsjp = Nokogiri.HTML(open(url_wsjp))
+	@result_wsjp = doc_wsjp.at_css('.wyszukiwanie_wyniki .wyszukiwanie_wyniki')
+
 	erb :szukaj
 end
  
