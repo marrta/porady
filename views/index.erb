@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>porada</title>
+  </head>
+  <body>
+    <h1>Mania sprawdzania</h1>
+  
+    <form method="GET" action="/szukaj"> 
+      <input type="text" value="" name="keyword"></input>
+      <button type="submit">szukaj</button>
+    </form>
+
+     <form method="GET" action="/s"> 
+      <input type="text" value="" name="keyword"></input>
+      <button type="submit">szukaj</button>
+    </form>
+
+    <form method="GET" action="http://poradnia.pwn.pl/lista.php"> 
+      Poradnia językowa PWN
+      <input type="text" value="" name="szukaj"></input>
+      <button type="submit">wybierz</button>
+    </form>
+    
+    <form method="post" action="http://www.poradniajezykowa.us.edu.pl/baza_archiwum.php"> 
+      Poradnia językowa Uniwersytetu Śląskiego
+      <input type="text" value="" name="WYRAZ"></input>
+      <input type="hidden" value="Wszystkie tematy" name="TEMAT"></input>
+      <input type="hidden" value="SZUKAJ" name="AKCJA"></input>
+      <button type="submit">wybierz</button>
+    </form> 
+
+     <form method="GET" action="http://www.poradnia-jezykowa.uz.zgora.pl/wordpress">
+      Poradnia językowa Uniwersytetu Zielonogórskiego
+      <input type="text" value="" name="s"></input>
+      <button type="submit">wybierz</button>
+    </form>
+
+    <form method="post" action="http://www.rjp.pan.pl/index.php?option=com_content&amp;view=category&amp;id=44:porady-jzykowe&amp;Itemid=58&amp;layout=default">  
+      Poradnia językowa Rady Języka Polskiego
+      <input type="text" value="" name="filter"></input>
+      <button type="submit">wybierz</button>
+    </form>
+
+    <form method="GET" action="http://www.wsjp.pl/index.php">
+      Wielki słownik języka polskiego
+      <input type="text" value="" name="szukaj"></input>
+      <button type="submit">wybierz</button>
+    </form>
+
+    <!-- <form method="post" action="http://sjp.pwn.pl/szukaj">
+      Słownik języka polskiego PWN
+      <input type="text" value="" name="co"></input>
+      <button type="submit">wybierz</button>
+    </form> -->
+  </body>
+</html>
+
