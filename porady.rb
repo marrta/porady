@@ -22,14 +22,14 @@ get '/szukaj' do
 
 	@results = []
 	SOURCES.each do |source|
-		@results = @results + collection(source.url_base, source.selector, source.encoding)
+		@results = @results + collection(source)
 	end
 	
 	erb :szukaj
 end
  
-def collection(url_base, selector, encoding = "UTF-8")
-	url = url_base + URI.encode(@keyword.encode(encoding))
+def collection(source)
+	url = source.url_base + URI.encode(@keyword.encode(source.encoding))
 	doc = Nokogiri.HTML(open(url))
-	result = doc.css(selector)
+	result = doc.css(source.selector)
 end
