@@ -9,16 +9,16 @@ end
 get '/szukaj' do
 	@keyword = params['keyword']
 
-	@result_poradnia = result('http://poradnia.pwn.pl/lista.php?szukaj=', '#listapytan', 'ISO-8859-2')
-	@result_uz = result('http://www.poradnia-jezykowa.uz.zgora.pl/wordpress/?s=', '#content')
-	@result_wsjp = result('http://www.wsjp.pl/index.php?szukaj=', '.wyszukiwanie_wyniki .wyszukiwanie_wyniki')
-	@result_sjp = result('http://sjp.pwn.pl/szukaj/', '#tresc')
+	@results = collection('http://poradnia.pwn.pl/lista.php?szukaj=', '#listapytan li', 'ISO-8859-2')
+	@results = @results + collection('http://www.poradnia-jezykowa.uz.zgora.pl/wordpress/?s=', 'article')
+	@results = @results + collection('http://www.wsjp.pl/index.php?szukaj=', '.wyszukiwanie_wyniki .wyszukiwanie_wyniki a')
+	@results = @results + collection('http://sjp.pwn.pl/szukaj/', '#listahasel li')
 
 	erb :szukaj
 end
  
-def result(url_base, selector, encoding = "UTF-8")
+def collection(url_base, selector, encoding = "UTF-8")
 	url = url_base + URI.encode(@keyword.encode(encoding))
 	doc = Nokogiri.HTML(open(url))
-	result = doc.at_css(selector).to_s.encode('UTF-8')	
+	result = doc.css(selector)
 end

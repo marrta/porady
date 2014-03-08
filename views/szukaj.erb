@@ -6,6 +6,9 @@
   </head>
   <body>
 	<h1> wyniki wyszukiwania „<%= @keyword %>”  </h1>
-  	<%= @result_poradnia %> <%= @result_uz %> <%= @result_wsjp %> <%= @result_sjp %> 
+	<% @results.each do |result| %>
+		<%= result.to_s.encode('UTF-8') %> 
+		<hr />
+	<% end %>	
  </body>
 </html>
